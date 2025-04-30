@@ -33,21 +33,37 @@ def show_histagram(data):
     print("Chart saved as: dice_histogram.png")
 def main ():
     while True:
-        print("\n Dice Roll Simulator")
-        print("1.Roll Die Once")
-        print("2.Show Histogram")
+        print("\nDice Roll Simulator")
+        print("1. Roll Die Once")
+        print("2. Show Histogram")
+        print("3. Roll Die and Save Result")
+        print("4. Exit")
 
-        choice = input("Choose an Option (1-5)")
+        choice = input("Choose an Option (1-4): ")
         if choice == "1":
             result = roll_die()
-            print (f"You rolled a {result}")
-            with open(FILENAME,"a") as file:
-                file.write(str(result)+"\n")
-        elif choice =="2":
-            data= read_data()
+            print(f"You rolled a {result}")
+        elif choice == "2":
+            data = read_data()
             show_histagram(data)
-        elif choice =="3":
-          result= roll_die()
-          print(f"You a {result}")
-       
-main()
+        elif choice == "3":
+            result = roll_die()
+            print(f"You rolled a {result}")
+            with open(FILENAME, "a") as file:
+                file.write(str(result) + "\n")
+        elif choice == "4":
+            data = read_data()
+            if data:
+                print("Dice Roll Data:")
+                for i, roll in enumerate(data, start=1):
+                    print(f"Roll {i}: {roll}")
+            else:
+                print("No data available.")
+        elif choice == "5":
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
